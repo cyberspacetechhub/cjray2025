@@ -24,7 +24,7 @@ app.use(logger);
 //
 
 //ping
-app.use('/ping', require('./routes/ping'));
+// app.use('/ping', require('./routes/ping'));
 app.use(credentials);
 app.use(cors(corsOptions));
 //app.use(reverseProxy);
@@ -35,10 +35,15 @@ app.use(express.json({limit:'50mb'}));
 
 app.use(cookieParser())
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 app.use('/', express.static(path.join(__dirname, '/public')));
 
 app.use('/', require('./routes/root'));
+app.use('/api/auth/login/', require('./routes/auth/login'));
+app.use('/api/refresh/', require('./routes/auth/refresh'));
+app.use('/api/auth/logout/', require('./routes/auth/logout'));
+app.use('/api/product', require('./routes/product'))
+app.use('/api/admin', require('./routes/admin'))
 app.use(verifyJWT);
 
 
