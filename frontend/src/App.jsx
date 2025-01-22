@@ -9,6 +9,7 @@ import AdminLayout from './components/admin/adminSubComponent/AdminLayout'
 import RequireAuthAdmin from './components/auth/RequireAuthAdmin'
 import Layout from './components/home/Layout';
 import AdminProducts from './components/admin/product/AdminProducts';
+import AdminOverview from './components/admin/adminSubComponent/AdminOverview';
 
 function App() {
   const queryClient = new QueryClient();
@@ -34,7 +35,7 @@ function App() {
                   path='/admin'
                   element={<AdminLayout/>} >
                     <Route
-                      index element={<AdminProducts />} />
+                      index element={<AdminOverview />} />
                 </Route>
               </Route>
             </Route>

@@ -21,12 +21,14 @@ const AddProductModal = ({ open, handleClose }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [imageUrl, setImageUrl] = useState(null);
   const uploadUrl = `${baseUrl}product/coverImage`;
+  const [coverImageUrl, setCoverImageUrl] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({ mode: "all" });
 
@@ -44,6 +46,8 @@ const AddProductModal = ({ open, handleClose }) => {
       setImageUrl(response.data.url);
       console.log(response)
       setValue('coverImage', response.data.url);
+      setCoverImageUrl(true)
+      reset()
       toast.success('Image uploaded successfully');
     } catch (error) {
       toast.error('Failed to upload image');
@@ -63,6 +67,7 @@ const AddProductModal = ({ open, handleClose }) => {
       const response = await post(url, data, auth?.accessToken);
       setTimeout(() => {
         setIsLoading(false)
+        setCoverImageUrl(false)
         reset()
         handleClose();
       }, 3000);
@@ -90,6 +95,7 @@ const AddProductModal = ({ open, handleClose }) => {
 
   }
 
+  
  // console.log(data)
   return (
     <Modal
@@ -159,7 +165,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Name
+                    Name <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -167,7 +173,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     id="name"
                     {...register("name", { required: true })}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type lesson name "
+                    placeholder="Type product name "
                     required=""
                   />
                   {errors.name && (
@@ -182,7 +188,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     htmlFor="Quantity"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Quantity
+                    Quantity <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="number"
@@ -204,7 +210,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     htmlFor="price"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Price
+                    Price <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="number"
@@ -226,7 +232,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     htmlFor="PurchasePrice"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Purchase Price
+                    Purchase Price <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="number"
@@ -249,7 +255,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     htmlFor="productNo"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Product No.
+                    Product No. <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="number"
@@ -315,13 +321,14 @@ const AddProductModal = ({ open, handleClose }) => {
                     </p>
                   )}
                 </div>
-                <div>
-                  {/* <label
+                {coverImageUrl && 
+                  <div>
+                  <label
                     htmlFor="coverImage"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Product Cover Image
-                  </label> */}
+                  </label>
                   <input
                     name="coverImage"
                     value={imageUrl}
@@ -330,13 +337,14 @@ const AddProductModal = ({ open, handleClose }) => {
                     // type="hidden"
                   />
                 </div>
+                }
 
                 <div className="sm:col-span-2">
                   <label
                     htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Product description
+                    Product description <span className="text-red-400">*</span>
                   </label>
                   <textarea
                     id="description"
@@ -368,7 +376,7 @@ const AddProductModal = ({ open, handleClose }) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                 {isLoading ? <CircularProgress size="18px" style={{color: "green"}} />: "Create New Lesson"}
+                 {isLoading ? <CircularProgress size="18px" style={{color: "green"}} />: "Add Product"}
               </button>
             </form>
           </div>

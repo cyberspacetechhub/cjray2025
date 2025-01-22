@@ -11,7 +11,7 @@ const AdminLayout = () => {
 
   return (
     <>
-      <div className="antialiased bg-gray-100 h-dvh min-h-max relative">
+      <div className="antialiased bg-gray-100 dark:bg-gray-900 h-dvh min-h-max relative">
        
        <AdminHeader setAside={setAside} />
 

@@ -11,9 +11,8 @@ const AdminHeader = ({ setAside }) => {
 
   // console.log(auth);
   
-
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
+    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-2.5 fixed left-0 right-0 top-0 z-50">
       <ToastContainer />
       <div className="flex flex-wrap justify-between items-center">
         <div className="flex justify-start items-center">
@@ -98,7 +97,7 @@ const AdminHeader = ({ setAside }) => {
                 type="text"
                 name="email"
                 id="topbar-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-primary-500 block w-full pl-10 p-2.5"
+                className="bg-gray-50 dark:bg-gray-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-primary-500 block w-full pl-10 p-2.5"
                 placeholder="Search"
               />
             </div>
@@ -127,23 +126,11 @@ const AdminHeader = ({ setAside }) => {
             </svg>
           </button>
         </div>
-        <div className=" text-emerald-600 flex justify-between items-center mb-0 max-md:hidden">
-        {auth ? (
-          <div className="">
-          <div className="">
-            <h2 className=" text-2xl mb-0">Welcome,  {auth?.user?.username}!</h2>
-            <span>{auth?.user?.type}</span>
-          </div> 
-        </div>
-      ) : (
-        <h2>Loading user information...</h2> // In case the user data is still being fetched
-      )}
-        </div>
         <div className="border h-16 w-16 rounded-full">
           <Link to={`/admin/profile/${auth?.user?._id}`}>
             <img src={auth?.user?.profile ? auth.user.profile : Avatar} alt="" className="w-full h-full rounded-full" />
           </Link>
-          </div>
+        </div>
       </div>
     </nav>
   );
