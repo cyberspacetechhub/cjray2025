@@ -35,7 +35,7 @@ const AdminOverview = () => {
   return (
     <div className='px-4 mt-20 h-auto'>
       <div className=''>
-       <div className=" text-emerald-600 flex justify-between items-center mb-0 bg-gray-400 rounded-md p-2">
+       <div className=" text-gray-800 dark:text-gray-300 flex justify-between items-center mb-0 bg-gray-400 dark:bg-gray-800 rounded-md p-2">
         {auth ? (
           <div className="">
           <div className="">
@@ -54,22 +54,23 @@ const AdminOverview = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md"
             >Add Product</button>
         </div>
-        <div className="overflow-x-auto shadow-md rounded-md mt-4 py-5 border border-dashed border-gray-300">
-          <h1 className='font-bold px-2 pb-2 border-b'>Products</h1>
+        <div className='shadow-md rounded-md mt-4 py-5 border border-dashed border-gray-300 dark:border-gray-800'>
+          <h1 className='font-bold px-2 pb-2 border-b border-gray-200 text-gray-700 dark:text-gray-300 dark:border-gray-800'>Products</h1>
+        <div className="overflow-x-auto bg-gray-100 dark:bg-gray-900">
         <table className="w-full min-w-max overflow-x-auto table-auto rounded-md">
           <thead className='bg-gray-100 dark:bg-gray-900'>
             <tr className=" text-white">
-              <th className="sticky left-0 bg-gray-100 dark:bg-gray-900 p-2 text-left z-10 text-gray-700">Name</th>
-              <th className=" p-2 text-left z-10 text-gray-700">Category</th>
-              <th className="p-2 text-left text-gray-700">Quantity</th>
-              <th className="p-2 text-left text-gray-700">Purchase Price</th>
-              <th className="p-2 text-left text-gray-700">Selling Price</th>
-              <th className="p-2 text-left text-gray-700">Status</th>
-              <th className="p-2 text-left text-gray-700">Product No.</th>
-              <th className="p-2 text-left text-gray-700">Action</th>
+              <th className="sticky left-0 bg-gray-100 dark:bg-gray-900 p-2 text-left z-10 text-gray-700 dark:text-gray-400">Name</th>
+              <th className=" p-2 text-left z-10 text-gray-700 dark:text-gray-400">Category</th>
+              <th className="p-2 text-left text-gray-700 dark:text-gray-400">Quantity</th>
+              <th className="p-2 text-left text-gray-700 dark:text-gray-400">Purchase Price</th>
+              <th className="p-2 text-left text-gray-700 dark:text-gray-400">Selling Price</th>
+              <th className="p-2 text-left text-gray-700 dark:text-gray-400">Status</th>
+              <th className="p-2 text-left text-gray-700 dark:text-gray-400">Product No.</th>
+              <th className="p-2 text-left text-gray-700 dark:text-gray-400">Action</th>
             </tr>
           </thead>
-          <tbody className='divide-y divide-gray-200 dark:divide-gray-600 dark:bg-gray-900 dark:text-gray-300'>
+          <tbody className='divide-y divide-gray-200 dark:divide-gray-800 dark:bg-gray-900 dark:text-gray-300'>
             {data?.products?.map((product) => (
               <tr key={product.position} className="hover:bg-gray-200 dark:hover:bg-gray-600">
                 <td className="sticky bg-gray-100 dark:bg-gray-900 left-0 p-2 z-20">{product.name}</td>
@@ -86,6 +87,7 @@ const AdminOverview = () => {
             ))}
           </tbody>
         </table>
+        </div>
         </div>
        </div>
 
