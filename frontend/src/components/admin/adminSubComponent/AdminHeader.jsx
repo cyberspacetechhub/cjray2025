@@ -64,8 +64,8 @@ const AdminHeader = ({ setAside }) => {
             to="/admin"
             className="flex items-center justify-between mr-4"
           >
-            <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-800 dark:text-gray-300">
-              <span className="hidden md:block">Admin</span> Dashboard
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-nowrap text-gray-800 dark:text-gray-300">
+              <span className="">Admin</span> Dashboard
             </span>
           </Link>
           {/* <form
@@ -127,6 +127,7 @@ const AdminHeader = ({ setAside }) => {
             </svg>
           </button>
         </div> */}
+        <div className="flex gap-10 items-center">
         <button onClick={() => {toggleDarkMode()}}>
           {
             !isDarkMode ? 
@@ -143,6 +144,7 @@ const AdminHeader = ({ setAside }) => {
           <Link to={`/admin/profile/${auth?.user?._id}`}>
             <img src={auth?.user?.profile ? auth.user.profile : Avatar} alt="" className="w-full h-full rounded-full" />
           </Link>
+        </div>
         </div>
       </div>
     </nav>
