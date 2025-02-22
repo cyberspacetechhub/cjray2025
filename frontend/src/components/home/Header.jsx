@@ -3,11 +3,12 @@ import { Link, Navigate } from "react-router-dom";
 import Signup from "../auth/Signup";
 import Signin from "../auth/Signin";
 import { useLocation } from "react-router-dom";
-import { ChevronRight, ExpandMore } from "@mui/icons-material";
+import { ChevronRight, ExpandMore, Shop, ShoppingCart, ShoppingCartOutlined } from "@mui/icons-material";
 import AuthContext from "../../context/AuthProvider";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
+import { useCart } from "../../context/CartContext";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +26,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { isDarkMode, toggleDarkMode } = useTheme();
-
+  const { cartCount } = useCart();
   const [state, dispatch] = useReducer(reducer, {
     login: false,
     register: false,
@@ -115,7 +116,16 @@ const Header = () => {
                     </button>
                   )
                 }
-                
+                <div className="block relative">
+                  <Link to='/cart'>
+                    <ShoppingCartOutlined />
+                    {cartCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white px-2 py-1 text-xs rounded-full">
+                        {cartCount}
+                      </span>
+                    )}
+                  </Link>
+                </div>
                 <button
                 onClick={handleShowNav} 
                 className="lg:hidden transition-transform duration-300 ease-in-out transform hover:scale-110"
@@ -159,12 +169,12 @@ const Header = () => {
       
       <Signup
           open={state.register}
-          handleClose={dispatch}
+          dispatch={dispatch}
         />{" "}
         
         <Signin
           open={state.login}
-          handleCloseLogin={dispatch}
+          dispatch={dispatch}
         />
     </div>
     </div>

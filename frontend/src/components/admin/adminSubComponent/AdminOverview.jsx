@@ -3,7 +3,7 @@ import AuthContext from "../../../context/AuthProvider";
 import { useContext } from "react";
 import AddProductModal from '../product/AddProductModal';
 import useFetch from '../../../hooks/useFetch';
-import baseUrl from '../../../shared/baseUrl';
+import baseUrl from '../../../shared/baseURL';
 import { useQuery } from 'react-query';
 import {Link} from 'react-router-dom'
 import Stats from './Stats';
@@ -31,7 +31,7 @@ const AdminOverview = () => {
         refetchOnMount:"always" }
   );
 
-  console.log(data)
+  // console.log(auth)
   return (
     <div className='px-4 mt-20 h-auto'>
       <div className=''>

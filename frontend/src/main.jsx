@@ -5,14 +5,17 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthProvider.jsx'
 import ThemeWrapper from './shared/ThemeWrapper.jsx'
+import { CartProvider } from './context/CartContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <AuthProvider>
       <ThemeWrapper>
-      <StrictMode>
-        <App />
-      </StrictMode>
+        <CartProvider>
+          <StrictMode>
+            <App />
+          </StrictMode>
+        </CartProvider>
       </ThemeWrapper>
     </AuthProvider>
   </BrowserRouter>

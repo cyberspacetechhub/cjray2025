@@ -10,6 +10,9 @@ import RequireAuthAdmin from './components/auth/RequireAuthAdmin'
 import Layout from './components/home/Layout';
 import AdminProducts from './components/admin/product/AdminProducts';
 import AdminOverview from './components/admin/adminSubComponent/AdminOverview';
+import ProductDetails from './components/home/pages/productDetails';
+import Checkout from './components/home/pages/Checkout';
+import Cart from './components/home/pages/Cart';
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,7 +27,21 @@ function App() {
               path='/' 
               element={<Layout/>}>
                 <Route 
-                  index element={<Home />} />
+                  index 
+                  element={<Home />} 
+                />
+                <Route
+                  path='/cart'
+                  element={<Cart />}
+                />
+                <Route
+                  path='/checkout'
+                  element={<Checkout />}
+                />
+                <Route
+                  path='/productdetails/:id'
+                  element={<ProductDetails />}
+                />
             </Route>
           </Route>
             {/* public route for admin */}

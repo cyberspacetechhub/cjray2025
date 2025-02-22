@@ -9,7 +9,6 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { FacebookOutlined, Google } from '@mui/icons-material'
 import { CircularProgress, Modal } from '@mui/material'
-import SignUp from './SignUp'
 
 
 const SignIn = ({open, dispatch}) => {

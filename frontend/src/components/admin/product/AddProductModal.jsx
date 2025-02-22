@@ -1,7 +1,7 @@
 
 import usePost from "../../../hooks/usePost";
 import useAuth from "../../../hooks/useAuth";
-import baseUrl from "../../../shared/baseUrl";
+import baseUrl from "../../../shared/baseURL";
 import Modal from "@mui/material/Modal";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";

@@ -200,6 +200,28 @@ const SignUp = ({ open, dispatch }) => {
                       </span>
                     )}
                   </div>
+
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="address"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Address:
+                    </label>
+                    <input
+                      id="address"
+                      name="address"
+                      type="text"
+                      {...register("address", { required: true })}
+                      className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-primary-500 "
+                      placeholder="Address"
+                    />
+                    {errors.address && (
+                      <span className="text-red-500 text-sm">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
                   <div className=" sm:col-span-2 ">
                     <label
                       htmlFor="password"
