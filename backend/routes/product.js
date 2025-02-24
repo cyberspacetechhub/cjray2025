@@ -10,6 +10,7 @@ router.route('/')
     .get(productController.handleGetAllProducts)
     .post(productController.handleCreateproduct)
     .put(productController.handleUpdateProduct)
+router.route('/recent').get(productController.handleGetRecentProducts)
 router.route('/coverImage')
     .post(
         fileUpload({ createParentPath: true }),

@@ -13,6 +13,7 @@ import AdminOverview from './components/admin/adminSubComponent/AdminOverview';
 import ProductDetails from './components/home/pages/productDetails';
 import Checkout from './components/home/pages/Checkout';
 import Cart from './components/home/pages/Cart';
+import SmartLocks from './components/home/pages/SmartLocks';
 
 function App() {
   const queryClient = new QueryClient();
@@ -41,6 +42,10 @@ function App() {
                 <Route
                   path='/productdetails/:id'
                   element={<ProductDetails />}
+                />
+                <Route
+                  path='/smartlocks'
+                  element={<SmartLocks />}
                 />
             </Route>
           </Route>

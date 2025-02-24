@@ -1,5 +1,6 @@
 const {
     getAllProducts,
+    getRecentProducts,
     createProduct,
     updateProduct,
     getProduct,
@@ -13,6 +14,16 @@ const handleGetAllProducts = async (req, res) => {
         limit: req.query.limit,
     }
     const products = await getAllProducts(data);
+    if(products.error) return res.status(500).json(products);
+    res.status(200).json(products);
+}
+
+const handleGetRecentProducts = async (req, res) => {
+    const data = {
+        page: req.query.page,
+        limit: req.query.limit,
+    }
+    const products = await getRecentProducts(data);
     if(products.error) return res.status(500).json(products);
     res.status(200).json(products);
 }
@@ -69,6 +80,7 @@ const handleUploadCoverImage = async (req, res) => {
   };
 module.exports = {
     handleGetAllProducts,
+    handleGetRecentProducts,
     handleCreateproduct,
     handleUpdateProduct,
     handleGetProduct,

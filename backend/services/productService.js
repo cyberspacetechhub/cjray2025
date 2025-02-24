@@ -24,6 +24,21 @@ const getAllProducts = async (data) => {
     }
 }
 
+const getRecentProducts = async (data) => {
+  const page = data.page || 1;
+  const limit = data.limit || 10;
+  const skip = (page - 1) * limit;
+
+  try {
+      const products = await Product.find().sort({ createdAt: -1 }).skip(skip).limit(limit).exec();
+      const totalCount = await Product.countDocuments();
+      const totalPages = Math.ceil(totalCount / limit);
+      return { products, page, totalPage: totalPages };
+  } catch (err) {
+      return { error: err.message };
+  }
+}
+
 const createProduct = async (data) => {
     try {
         const newProduct = await Product.create({
@@ -122,6 +137,7 @@ const uploadCoverImage = async (file, id) => {
   
 module.exports = {
     getAllProducts,
+    getRecentProducts,
     createProduct,
     updateProduct,
     getProduct,

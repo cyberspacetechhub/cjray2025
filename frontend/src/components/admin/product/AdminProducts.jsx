@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AddProductModal from './AddProductModal';
 import useAuth from '../../../hooks/useAuth';
 import useFetch from '../../../hooks/useFetch';
-import baseUrl from '../../../shared/baseUrl';
+import baseUrl from '../../../shared/baseURL';
 import { useQuery } from 'react-query';
 import {Link} from 'react-router-dom'
 
@@ -31,7 +31,19 @@ const AdminProducts = () => {
   );
 
   console.log(data)
-
+  const totalProductsPrice = data?.products?.reduce((acc, product) => {
+    const price = parseFloat(product.price.$numberDecimal);
+    return acc + price;
+  }, 0);
+  const totalProductsPurchasePrice = data?.products?.reduce((acc, product) => {
+    const price = parseFloat(product.purchasePrice.$numberDecimal);
+    return acc + price;
+  }, 0);
+  const totalProductsQuantity = data?.products?.reduce((acc, product) => {
+    const quantity = parseFloat(product.quantity);
+    return acc + quantity;
+  }, 0);
+  
   return (
     <div className=' mt-20 px-4 md:px-16'>
       <button onClick={() => {handleOpen()}}>Add Product</button>

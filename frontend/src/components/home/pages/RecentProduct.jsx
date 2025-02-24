@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 const RecentProduct = () => {
   const {auth} = useAuth();
   const fetch = useFetch();
-  const url = `${baseUrl}product`
+  const url = `${baseUrl}product/recent`
 
   const getproducts = async () => {
     const result = await fetch(url, auth.accessToken);

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../../context/AuthProvider";
 import useFetch from "../../../hooks/useFetch";
 import baseUrl from "../../../shared/baseURL";
+import ChartStat from "./ChartStat";
+import ProductMonthlyChart from "./ProductMonthlyChart";
 
 // Reusable Card Component
 const StatCard = ({ icon, label, value }) => (
@@ -19,9 +21,9 @@ const StatCard = ({ icon, label, value }) => (
 // Reusable Bar Component
 const Bar = ({ height, label }) => (
   <div>
-    <span className="block w-3.5 h-40 rounded-full shadow-md relative bg-gray-300">
+    <span className="block w-3.5 h-40 rounded- shadow-md relative bg-gray-300">
       <span
-        className="block w-3.5 rounded-full shadow-md absolute bottom-0 left-0 bg-blue-600"
+        className="block w-3.5 rounded- shadow-md absolute bottom-0 left-0 bg-blue-600"
         style={{ height: `${height}%` }}
       ></span>
     </span>
@@ -77,7 +79,7 @@ const Stats = () => {
       const percentage = (count / total) * 100;
   
       // Log the data for debugging
-      console.log(`Month: ${month}, Count: ${count}, Total: ${total}, Percentage: ${percentage}%`);
+      // console.log(`Month: ${month}, Count: ${count}, Total: ${total}, Percentage: ${percentage}%`);
   
       return {
         label: month,
@@ -91,6 +93,25 @@ const Stats = () => {
   if (isError) return <div>Error loading data.</div>;
 
   const monthlyData = calculateMonthlyData(products);
+
+  const totalProductsPrice = data?.products?.reduce((acc, product) => {
+    const price = parseFloat(product.price.$numberDecimal);
+    return acc + price;
+  }, 0);
+  const totalProductsPurchasePrice = data?.products?.reduce((acc, product) => {
+    const price = parseFloat(product.purchasePrice.$numberDecimal);
+    return acc + price;
+  }, 0);
+  const totalProductsQuantity = data?.products?.reduce((acc, product) => {
+    const quantity = parseFloat(product.quantity);
+    return acc + quantity;
+  }, 0);
+
+  const totalSells = data?.products?.reduce((acc, product) => {
+    const quantity = parseFloat(product.quantity);
+    const price = parseFloat(product.price.$numberDecimal);
+    return acc + quantity * price;
+  }, 0);
 
   return (
     <div>
@@ -124,8 +145,38 @@ const Stats = () => {
               <path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/>
             </svg>
           }
-          label="Product Sum"
-          value="Value"
+          label="Product Quantity"
+          value={totalProductsQuantity.toLocaleString()}
+        />
+        <StatCard
+          icon={
+            <svg xmlns="http://www.w3.org/2000/svg" 
+            className='w-8 h-8 text-blue-700'
+            //  height="24px" 
+             viewBox="0 -960 960 960" 
+            //  width="24px" 
+             fill="currentColor"
+              >
+              <path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/>
+            </svg>
+          }
+          label="Total Purch. Price"
+          value={totalProductsPurchasePrice.toLocaleString('en-US',{ style: 'currency', currency: 'NGN' })}
+        />
+        <StatCard
+          icon={
+            <svg xmlns="http://www.w3.org/2000/svg" 
+            className='w-8 h-8 text-blue-700'
+            //  height="24px" 
+             viewBox="0 -960 960 960" 
+            //  width="24px" 
+             fill="currentColor"
+              >
+              <path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/>
+            </svg>
+          }
+          label="Toal Selling Price"
+          value={totalProductsPrice.toLocaleString('en-US', { style: 'currency', currency: 'NGN' })}
         />
         <StatCard
           icon={
@@ -138,7 +189,7 @@ const Stats = () => {
             <path d="M280-280h80v-200h-80v200Zm320 0h80v-400h-80v400Zm-160 0h80v-120h-80v120Zm0-200h80v-80h-80v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
           </svg>
           }
-          label="Total Sales"
+          label="Total Sells"
           value="Value"
         />
         <StatCard
@@ -178,15 +229,20 @@ const Stats = () => {
 
       {/* Bar Graph */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
-        <div className="flex justify-center gap-3 bg-blue-300 p-4 rounded-md shadow-md">
+        <div>
+          {/* <h1></h1>
+        <div className="flex justify-center items-center gap-3 bg-gray-200 shadow-lg p-4 rounded-md">
           {monthlyData.map(({ label, percentage }) => (
             <Bar key={label} height={percentage} label={label} />
           ))}
+        </div> */}
+        <ProductMonthlyChart />
         </div>
-        <div className="flex justify-center gap-3 bg-blue-300 p-4 rounded-md shadow-md">
-          {monthlyData.map(({ label, percentage }) => (
+        <div className="">
+          {/* {monthlyData.map(({ label, percentage }) => (
             <Bar key={label} height={percentage} label={label} />
-          ))}
+          ))} */}
+          <ChartStat />
         </div>
       </div>
     </div>

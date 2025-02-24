@@ -68,19 +68,25 @@ const Header = () => {
                   Real Estate
                 </Link>
                 <Link to='/smartlocks' onClick={handleShowNav} className={location.pathname === '/smartlocks' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
-                  Smart Locks
+                  Smart Home & Automation
                 </Link>
                 <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
-                  Kitchen Utensils
-                </Link>
-                <Link to='/grants' onClick={handleShowNav} className={location.pathname === '/grants' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-blue-500' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
-                  Security Gadgets
+                  Fire Safety & Protection
                 </Link>
                 <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
-                  Electrical Gadgets
+                  Creator's Light
+                </Link>
+                {/* <Link to='/grants' onClick={handleShowNav} className={location.pathname === '/grants' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-blue-500' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                  Smart Home & Automation
+                </Link> */}
+                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                  Selfie Sticks & Tripods
                 </Link>
                 <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
-                  Solar Lights
+                  Lights and Lighting
+                </Link>
+                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                  Blogs
                 </Link>
               </div>
               <div>
