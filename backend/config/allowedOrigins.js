@@ -5,7 +5,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:5174',
     'localhost:5173',
-    'https://cjrayvestpropsestltd.vercel.app',
+    'https://cjrayvestpropsestltd-eta.vercel.app',
     'https://cjrayvestpropsestltd.onrender.com'
 ]
 
