@@ -11,11 +11,11 @@ const ProductSchema = new Schema({
     required: true
   },
   purchasePrice: {
-    type: mongoose.Schema.Types.Decimal128,
+    type: Number,
     required: true
   },
   price: {
-    type: mongoose.Schema.Types.Decimal128,
+    type: Number,
     required: true
   },
   quantity: {

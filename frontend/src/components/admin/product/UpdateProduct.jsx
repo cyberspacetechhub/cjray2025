@@ -1,38 +1,33 @@
-
-import usePost from "../../../hooks/usePost";
+import React, { useState, useEffect } from 'react';
 import useAuth from "../../../hooks/useAuth";
-import baseUrl from "../../../shared/baseURL";
-import Modal from "@mui/material/Modal";
+import baseURL from '../../../shared/baseURL';
+import Modal from '@mui/material/Modal';
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import useUpdate from "../../../hooks/useUpdate";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { CircularProgress } from "@mui/material";
-import { useState } from "react";
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useQueryClient, useMutation } from "react-query";
+import { useNavigate } from 'react-router-dom';
+import useUpdate from "../../../hooks/useUpdate" // Custom hook for fetching data
+import { CircularProgress } from '@mui/material';
 
 
-const AddProductModal = ({ open, handleClose }) => {
-  const post = usePost();
-  const update = useUpdate();
-  const { auth } = useAuth();
-  const url = `${baseUrl}product`;
+const UpdateProduct = ({ open, handleClose, product }) => {
   const queryClient = useQueryClient();
-  const [isLoading, setIsLoading] = useState(false)
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+  const update = useUpdate();
+  const [isLoading, setIsLoading] = useState(false);
+  const url = `${baseURL}product`;
   const [imageUrl, setImageUrl] = useState(null);
-  const uploadUrl = `${baseUrl}product/coverImage`;
+  const uploadUrl = `${baseURL}product/coverImage`;
   const [coverImageUrl, setCoverImageUrl] = useState(false);
 
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({ mode: "all" });
 
-  
   const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append('file', file);
@@ -62,38 +57,56 @@ const AddProductModal = ({ open, handleClose }) => {
     }
   };
 
-  const createProduct = async (data) => {
-    setIsLoading(true)
-      const response = await post(url, data, auth?.accessToken);
-      setTimeout(() => {
-        setIsLoading(false)
-        setCoverImageUrl(false)
-        reset()
-        handleClose();
-      }, 3000);
-      console.log(response.data)
+  // Set the form fields with the fetched data
+  useEffect(() => {
+    if (product) {
+      Object.entries(product).forEach(([key, value]) => {
+        if (key === "price" || key === "purchasePrice") {
+          setValue(key, parseFloat(value).toFixed(2)); // Ensure prices are properly formatted
+        } else {
+          setValue(key, value);
+        }
+      });
+    }
+  }, [product, setValue]);
+  
 
+  const updateProduct = async (data) => {
+    setIsLoading(true)
+    if (!auth || !auth?.accessToken) {
+      navigate('/login');
+      return;
+    }
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+    //console.log(data)
+
+    try {
+      const response = await update(url, data, auth?.accessToken);
+      console.log(response);
+    } catch (err) {
+      setIsLoading(false)
+      setError(err.response?.data?.error || err.message);
+    }
   };
 
-  const {mutate} = useMutation(createProduct,{
-
-    onSuccess: ()=>{
-      queryClient.invalidateQueries('products')
-    }, onError: () => {
+  const { mutate } = useMutation(updateProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('products');
+      setTimeout(() => {
+        handleClose();
+      }, 3000);
+      toast.success('Product updated successfully');
       setIsLoading(false)
     }
-  })
+  });
 
-  const handleCreateProduct = (product) => {
-
-    mutate(product)
-
-    toast.success('Product Added Successfully');
-
-      setIsLoading(false)
-     
-
-  }
+  const handleProductUpdate = (data) => {
+    mutate(data);
+    
+  };
 
   
  // console.log(data)
@@ -117,7 +130,7 @@ const AddProductModal = ({ open, handleClose }) => {
             {/* <!-- Modal header --> */}
             <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Add Product
+                Update Product
               </h3>
               <button
                 type="button"
@@ -144,7 +157,7 @@ const AddProductModal = ({ open, handleClose }) => {
               </button>
             </div>
             {/* <!-- Modal body --> */}
-            <form onSubmit={handleSubmit(handleCreateProduct)}>
+            <form onSubmit={handleSubmit(handleProductUpdate)}>
               <div className="mb-4">
                 <label
                   htmlFor="productCompany"
@@ -390,4 +403,4 @@ const AddProductModal = ({ open, handleClose }) => {
   );
 };
 
-export default AddProductModal;
+export default UpdateProduct;

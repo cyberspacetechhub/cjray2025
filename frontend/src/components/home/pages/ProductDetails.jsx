@@ -99,7 +99,7 @@ const ProductDetails = () => {
           <div className="md:w-1/2 p-4">
             <h2 className="text-3xl font-bold text-gray-900">{product?.name}</h2>
             <p className="text-2xl font-semibold text-gray-700 mt-2">
-              &#8358;{parseFloat(product?.price.$numberDecimal).toLocaleString("en-US")}
+              &#8358;{product?.price.toLocaleString("en-US")}
             </p>
 
             {/* Category, Brand, Product Number */}

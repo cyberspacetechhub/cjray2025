@@ -10,10 +10,19 @@ import RequireAuthAdmin from './components/auth/RequireAuthAdmin'
 import Layout from './components/home/Layout';
 import AdminProducts from './components/admin/product/AdminProducts';
 import AdminOverview from './components/admin/adminSubComponent/AdminOverview';
-import ProductDetails from './components/home/pages/productDetails';
+import ProductDetails from './components/home/pages/ProductDetails';
 import Checkout from './components/home/pages/Checkout';
 import Cart from './components/home/pages/Cart';
 import SmartLocks from './components/home/pages/SmartLocks';
+import PopularProduct from './components/home/pages/PopularProduct';
+import RecentProduct from './components/home/pages/RecentProduct';
+import TopPicks from './components/home/pages/TopPicks';
+import Page404 from './components/views/Page404';
+import UnAuthorized from './components/views/Unathorized';
+import FireSafetyP from './components/home/pages/FireSafetyP';
+import CreatorLight from './components/home/pages/CreatorLight';
+import GadgElectronic from './components/home/pages/GadgElectronic';
+import Lightings from './components/home/pages/Lightings';
 
 function App() {
   const queryClient = new QueryClient();
@@ -47,6 +56,34 @@ function App() {
                   path='/smartlocks'
                   element={<SmartLocks />}
                 />
+                <Route
+                  path='/popularproducts'
+                  element={<PopularProduct />}
+                />
+                <Route
+                  path='/recent_products'
+                  element={<RecentProduct />}
+                />
+                <Route
+                  path='/selfie_sticks_tripods'
+                  element={<TopPicks />}
+                />
+                <Route
+                  path='/fire_safety_protections'
+                  element={<FireSafetyP />}
+                />
+                <Route
+                  path='/creators_light'
+                  element={<CreatorLight />}
+                />
+                <Route
+                  path='/gadgets_electronics'
+                  element={<GadgElectronic />}
+                />
+                <Route
+                  path='/lightings'
+                  element={<Lightings />}
+                />
             </Route>
           </Route>
             {/* public route for admin */}
@@ -61,6 +98,14 @@ function App() {
                 </Route>
               </Route>
             </Route>
+            <Route
+              path="*"
+              element={<Page404 />}
+            />
+            <Route
+              path="unauthorized"
+              element={<UnAuthorized />}
+            />
         </Routes>
       </>
     </QueryClientProvider>

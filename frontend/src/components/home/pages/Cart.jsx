@@ -24,7 +24,7 @@ const Cart = () => {
             <div key={item.id} className="flex justify-between items-center p-4 border">
               <div>
                 <h2 className="text-lg">{item.name}</h2>
-                <p>₦{(parseFloat(item.price.$numberDecimal) * item.quantity).toLocaleString()}</p>
+                <p>₦{(item.price * item.quantity).toLocaleString()}</p>
               </div>
               <div>
                 <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>

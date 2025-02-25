@@ -68,12 +68,13 @@ const AdminProducts = () => {
                 <td className="sticky bg-gray-100 dark:bg-gray-900 left-0 p-2 z-20">{product.name}</td>
                 <td className=" p-2 z-10">{product.category}</td>
                 <td className="p-2">{product.quantity}</td>
-                <td className="p-2">&#8358;{parseFloat(product.purchasePrice.$numberDecimal).toLocaleString('en-US')}</td>
-                <td className="p-2">&#8358;{parseFloat(product.price.$numberDecimal).toLocaleString('en-US')}</td>
+                <td className="p-2">&#8358;{product.purchasePrice.toLocaleString('en-US')}</td>
+                <td className="p-2">&#8358;{product.price.toLocaleString('en-US')}</td>
                 <td className="p-2">{product.status}</td>
                 <td className="p-2">{product.productNo}</td>
-                <td className="p-2">
+                <td className="p-2 flex">
                   <button>Edit</button>
+                  <button className='py-2 px-4 bg-red-600 text-white rounded'>Delete</button>
                 </td>
               </tr>
             ))}

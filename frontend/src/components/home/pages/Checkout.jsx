@@ -19,10 +19,10 @@ const Checkout = () => {
 
   // Function to get the price properly
   const getPrice = (item) => {
-    if (typeof item.price === "object" && item.price.$numberDecimal) {
-      return parseFloat(item.price.$numberDecimal);
+    if (typeof item.price === "object" && item.price) {
+      return (item.price);
     }
-    return parseFloat(item.price) || 0;
+    return (item.price) || 0;
   };
 
   // Calculate Total Amount

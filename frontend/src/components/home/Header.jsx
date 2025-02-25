@@ -64,28 +64,28 @@ const Header = () => {
                   Home
                 </Link>
               
-                <Link to='/smartlocks' onClick={handleShowNav} className={location.pathname === '/smartlocks' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                <Link to='/realestate' onClick={handleShowNav} className={location.pathname === '/realestate' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Real Estate
                 </Link>
                 <Link to='/smartlocks' onClick={handleShowNav} className={location.pathname === '/smartlocks' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Smart Home & Automation
                 </Link>
-                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                <Link to='/fire_safety_protections' onClick={handleShowNav} className={location.pathname === '/fire_safety_protections' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Fire Safety & Protection
                 </Link>
-                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                <Link to='/creators_light' onClick={handleShowNav} className={location.pathname === '/creators_light' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Creator's Light
                 </Link>
-                {/* <Link to='/grants' onClick={handleShowNav} className={location.pathname === '/grants' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-blue-500' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
-                  Smart Home & Automation
-                </Link> */}
-                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                <Link to='/gadgets_electronics' onClick={handleShowNav} className={location.pathname === '/gadgets_electronics' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-blue-500' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                  Gadgets & Electronics
+                </Link>
+                <Link to='/selfie_sticks_tripods' onClick={handleShowNav} className={location.pathname === '/selfie_sticks_tripods' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Selfie Sticks & Tripods
                 </Link>
-                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                <Link to='/lightings' onClick={handleShowNav} className={location.pathname === '/lightings' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Lights and Lighting
                 </Link>
-                <Link to='/kitchenutls' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
+                <Link to='/blogs' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Blogs
                 </Link>
               </div>
@@ -123,7 +123,7 @@ const Header = () => {
                   )
                 }
                 <div className="block relative">
-                  <Link to='/cart'>
+                  <Link to='/cart' className="text-gray-800 dark:text-gray-300">
                     <ShoppingCartOutlined />
                     {cartCount > 0 && (
                       <span className="absolute -top-2 -right-2 bg-red-500 text-white px-2 py-1 text-xs rounded-full">

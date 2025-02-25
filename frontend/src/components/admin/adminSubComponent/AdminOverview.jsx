@@ -7,12 +7,24 @@ import baseUrl from '../../../shared/baseURL';
 import { useQuery } from 'react-query';
 import {Link} from 'react-router-dom'
 import Stats from './Stats';
-
+import DeleteQuery from '../../actions/DeleteQuery';
+import UpdateProduct from '../product/UpdateProduct';
+ 
 const AdminOverview = () => {
   const { auth } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const [openDel, setOpenDel] = useState(false)
+  const handleOpenDel = () => setOpenDel(true)
+  const handleCloseDel = () => setOpenDel(false)
+
+  const [openUpdate, setOpenUpdate] = useState(false)
+  const handleOpenUpdate = () => setOpenUpdate(true)
+  const handleCloseUpdate = () => setOpenUpdate(false)
+
+  const [productId, setProductId] = useState(false)
 
   const fetch = useFetch();
   const url = `${baseUrl}product`
@@ -76,12 +88,13 @@ const AdminOverview = () => {
                 <td className="sticky bg-gray-100 dark:bg-gray-900 left-0 p-2 z-20">{product.name}</td>
                 <td className=" p-2 z-10">{product.category}</td>
                 <td className="p-2">{product.quantity}</td>
-                <td className="p-2">&#8358;{parseFloat(product.purchasePrice.$numberDecimal).toLocaleString('en-US')}</td>
-                <td className="p-2">&#8358;{parseFloat(product.price.$numberDecimal).toLocaleString('en-US')}</td>
+                <td className="p-2">&#8358;{product.purchasePrice.toLocaleString('en-US')}</td>
+                <td className="p-2">&#8358;{product.price.toLocaleString('en-US')}</td>
                 <td className="p-2">{product.status}</td>
                 <td className="p-2">{product.productNo}</td>
-                <td className="p-2">
-                  <button>Edit</button>
+                <td className="p-2 flex items-center gap-4">
+                  <button onClick={() => {handleOpenUpdate(); setProductId(product)}} className='py-1 px-4 bg-blue-600 text-white rounded'>Edit</button>
+                  <button onClick={() => {handleOpenDel(); setProductId(product._id)}} className='py-1 px-4 bg-red-600 text-white rounded'>Delete</button>
                 </td>
               </tr>
             ))}
@@ -95,6 +108,17 @@ const AdminOverview = () => {
         <AddProductModal
           open={open}
           handleClose={handleClose}
+        />
+        <DeleteQuery
+          open={openDel}
+          handleClose={handleCloseDel}
+          itemId={productId}
+          url={url}
+        />
+        <UpdateProduct
+          open={openUpdate}
+          handleClose={handleCloseUpdate}
+          product={productId}
         />
       </div>
     </div>
