@@ -55,11 +55,11 @@ const fireSafetyProtections = products.filter(product => product.category === "F
         <input onClick={() => navigate(-1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer mt-5" type="button" value="Back" />
         <h2 className='font-semibold text-gray-700 dark:text-gray-300 text-lg md:text-2xl py-4 uppercase'>Fire Safety & Protection 🧯</h2>
         <div className=' pb-5'>
-          <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
+          <div className='mt-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
           {fireSafetyProtections.map((product, index) => (
             <div
               key={index}
-              className="rounded-lg shadow-md hover:shadow-xl transition duration-200 p-2 bg-gray-200 dark:bg-gray-600 w-60 flex-shrink-0 md:w-auto"
+              className="rounded-lg shadow-md hover:shadow-xl transition duration-200 p-2 bg-gray-200 dark:bg-gray-600"
             >
               <Link 
                 to={`/productdetails/${product._id}`}
