@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <div className="">
       <div className="bg-blue-500 dark:bg-gray-500 text-white py-2">
-        <p className=" text-center font-semibold tracking-wide text-xl">Your home of quality and ultimate gadgets</p>
+        <p className=" text-center font-semibold tracking-wide text-xl">Home of quality and ultimate gadgets</p>
       </div>
       <div className="sticky top-16 w-full bg-white dark:bg-gray-900 ">
       <header className="md:px-10 max-lg:px-10">

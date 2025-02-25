@@ -8,7 +8,7 @@ import Marquee from "react-fast-marquee";
 const SubPage = () => {
   return (
     <div className=' mt-5'>
-      <div className='md:px-10 max-lg:px-10 max-sm:px-5'>
+      <div className='px-0 md:px-10'>
         <div>
           <h1 className='text-4xl font-bold text-gray-800 dark:text-gray-200 text-center py-4'>Why Buy from Us?</h1>
           <div className='px-10 md:px-40 text-gray-800 dark:text-gray-300'>
