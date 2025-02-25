@@ -1,7 +1,7 @@
 import React, { useState, useReducer } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Signup from "../auth/SignUp";
-import Signin from "../auth/Signin";
+import Signin from "../auth/SignIn";
 import { useLocation } from "react-router-dom";
 import { ChevronRight, ExpandMore, Shop, ShoppingCart, ShoppingCartOutlined } from "@mui/icons-material";
 import AuthContext from "../../context/AuthProvider";
