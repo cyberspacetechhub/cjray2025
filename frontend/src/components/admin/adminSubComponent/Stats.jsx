@@ -95,11 +95,11 @@ const Stats = () => {
   const monthlyData = calculateMonthlyData(products);
 
   const totalProductsPrice = data?.products?.reduce((acc, product) => {
-    const price = parseFloat(product.price.$numberDecimal);
+    const price = parseFloat(product.price);
     return acc + price;
   }, 0);
   const totalProductsPurchasePrice = data?.products?.reduce((acc, product) => {
-    const price = parseFloat(product.purchasePrice.$numberDecimal);
+    const price = parseFloat(product.purchasePrice);
     return acc + price;
   }, 0);
   const totalProductsQuantity = data?.products?.reduce((acc, product) => {
@@ -109,7 +109,7 @@ const Stats = () => {
 
   const totalSells = data?.products?.reduce((acc, product) => {
     const quantity = parseFloat(product.quantity);
-    const price = parseFloat(product.price.$numberDecimal);
+    const price = parseFloat(product.price);
     return acc + quantity * price;
   }, 0);
 
