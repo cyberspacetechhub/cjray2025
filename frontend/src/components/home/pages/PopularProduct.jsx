@@ -51,12 +51,12 @@ const PopularProducts = products.filter(product =>
   };
 
   return (
-    <div className='bg-gray-300 dark:bg-gray-700 mt-5'>
+    <div className='bg-gray-300 dark:bg-gray-700 mt-5 relative'>
       {
         location.pathname === '/' ? (
           <div className="md:px-10 max-lg:px-10 max-sm:px-5">
         <h2 className='font-semibold text-gray-700 dark:text-gray-300 text-lg md:text-2xl py-4 inline-flex items-center'>Hot 🔥</h2>
-        <div className=' pb-5 relative'>
+        <div className=' pb-5 z-0'>
         <button
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700 block md:hidden"
           onClick={scrollLeft}
@@ -65,7 +65,7 @@ const PopularProducts = products.filter(product =>
         </button>
         <div 
           ref={scrollContainerRef}
-          className="mt-5 md:grid md:grid-cols-6 gap-4 overflow-x-auto flex md:">
+          className="mt-5 md:grid md:grid-cols-6 gap-4 overflow-x-auto flex">
           {PopularProducts.map((product, index) => (
             <div
               key={index}

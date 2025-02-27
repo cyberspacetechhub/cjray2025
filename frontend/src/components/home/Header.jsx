@@ -56,8 +56,9 @@ const Header = () => {
                 <h1 className="text-4xl max-sm:text-3xl font-bold text-center text-gray-700 dark:text-gray-300">CjRayVest</h1>
               </Link>
               </div>
-              <div 
-                className={`lg:flex flex-wrap ${isSmallScreen && showNav ? 'flex flex-col absolute top-16 md:top-20 left-0 w-full md:w-80 bg-gray-200 dark:bg-gray-900 pl-10 py-5 transition-all ease-in-out transform translate-y-0 opacity-100' : 'hidden'} gap-10 lg:gap-4 transition-all durablue-500 ease-in-out transform opacity-100`}>
+              <div
+              className={`lg:flex ${isSmallScreen && showNav ? 'flex flex-col absolute top-16 md:top-20 left-0 h-96 w-full bg-green-200 dark:bg-gray-900 pl-10 py-5 z-50 transition-all ease-in-out transform opacity-100 overflow-y-auto' : 'hidden'} lg:flex-wrap gap-10 lg:gap-4 transition-all ease-in-out transform opacity-100`}
+                >
                 <Link
                   to='/'
                   onClick={handleShowNav}
@@ -90,9 +91,27 @@ const Header = () => {
                 <Link to='/blogs' onClick={handleShowNav} className={location.pathname === '/kitchenutls' ? 'text-blue-500 font-normal tracking-wide text-start text-lg hover:text-gray-300' : 'font-normal tracking-wide text-start text-lg text-gray-700 dark:text-gray-300 hover:text-blue-500'}>
                   Blogs
                 </Link>
+                <div className="block lg:hidden">
+                {
+                  auth.user ? (
+                    <button onClick={() => navigate( auth.user.roles === 'Customer' ? '/dashboard' : '')} className=" text-start  p-1">
+                      <span className=" text-gray-700 dark:text-gray-300 font-semibold hover:text-blue-400">Dashboard</span>
+                      
+                    </button>
+                  ) : (
+                    <button 
+                    onClick={() => {
+                      dispatch({ type: "openLogin" });
+                      handleShowNav();
+                    }}
+                    className=" text-start">
+                      <span className=" text-gray-700 dark:text-gray-300 font-semibold hover:text-blue-400 text-nowrap">Sign Up Free</span>
+                    </button>
+                  )
+                }
+                </div>
               </div>
               <div>
-                
               </div>
               <div className="flex items-center gap-4">
               <button onClick={() => {toggleDarkMode()}}>
@@ -107,9 +126,10 @@ const Header = () => {
                     </span>
                   }
                 </button>
-                {
+               <div className="hidden lg:block">
+               {
                   auth.user ? (
-                    <button onClick={() => navigate( auth.user.roles === 'Customer' ? '/dashboard' : '')} className=" text-start  w-40  p-1">
+                    <button onClick={() => navigate( auth.user.roles === 'Customer' ? '/dashboard' : '')} className=" text-start  p-1">
                       <span className=" text-gray-700 dark:text-gray-300 font-semibold hover:text-blue-400">Dashboard</span>
                       
                     </button>
@@ -120,10 +140,11 @@ const Header = () => {
                       handleShowNav();
                     }}
                     className=" text-start">
-                      <span className=" text-gray-700 dark:text-gray-300 font-semibold hover:text-blue-400 hidden lg:block text-nowrap">Sign Up Free</span>
+                      <span className=" text-gray-700 dark:text-gray-300 font-semibold hover:text-blue-400 text-nowrap">Sign Up Free</span>
                     </button>
                   )
                 }
+               </div>
                 <div className="block relative">
                   <Link to='/cart' className="text-gray-800 dark:text-gray-300">
                     <ShoppingCartOutlined />

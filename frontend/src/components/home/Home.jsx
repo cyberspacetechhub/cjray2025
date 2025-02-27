@@ -16,7 +16,7 @@ import Reviews from './Reviews'
 
 const Home = () => {
   return (
-    <div>
+    <div className='z-0'>
       <div>
         <div className='bg-cover bg-center bg-no-repeat w-full h-[200px] md:h-[300px] flex flex-col justify-center items-center' style={{ backgroundImage: `url(${HeroImg})` }}>
           <h2 className='text-gray-200 text-2xl font-bold text-center'>Home Automations, Smart Lockss, CCTVS and More</h2>
