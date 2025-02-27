@@ -57,7 +57,7 @@ const Header = () => {
               </Link>
               </div>
               <div
-              className={`lg:flex ${isSmallScreen && showNav ? 'flex flex-col absolute top-16 md:top-20 left-0 h-96 w-full bg-green-200 dark:bg-gray-900 pl-10 py-5 z-50 transition-all ease-in-out transform opacity-100 overflow-y-auto' : 'hidden'} lg:flex-wrap gap-10 lg:gap-4 transition-all ease-in-out transform opacity-100`}
+              className={`lg:flex ${isSmallScreen && showNav ? 'flex flex-col absolute top-16 md:top-20 left-0 h-96 w-full bg-gray-200 dark:bg-gray-900 pl-10 py-5 z-50 transition-all ease-in-out transform opacity-100 overflow-y-auto' : 'hidden'} lg:flex-wrap gap-10 lg:gap-4 transition-all ease-in-out transform opacity-100`}
                 >
                 <Link
                   to='/'
