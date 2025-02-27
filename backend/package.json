@@ -13,6 +13,7 @@
     "http-proxy-middleware": "^3.0.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.3",
+    "nodemailer": "^6.10.0",
     "prerender-node": "^3.8.0",
     "sharp": "^0.33.5",
     "uuid": "^11.0.4"

@@ -23,6 +23,9 @@ import FireSafetyP from './components/home/pages/FireSafetyP';
 import CreatorLight from './components/home/pages/CreatorLight';
 import GadgElectronic from './components/home/pages/GadgElectronic';
 import Lightings from './components/home/pages/Lightings';
+import VerifyPage from './components/auth/VerifyPage';
+import SignIn from './components/auth/SignIn';
+import VerifyEmail from './components/auth/VerifyEmail';
 
 function App() {
   const queryClient = new QueryClient();
@@ -84,10 +87,19 @@ function App() {
                   path='/lightings'
                   element={<Lightings />}
                 />
+                <Route
+                  path='/verify'
+                  element={<VerifyPage />}
+                />
+                <Route
+                  path='/verify_email'
+                  element={<VerifyEmail />}
+                />
             </Route>
           </Route>
             {/* public route for admin */}
             <Route path='/auth/login' element={<Login />} />
+            <Route path='/auth/signin' element={<SignIn />} />
             <Route element={<PersistLogin />}>
               <Route element={<RequireAuthAdmin allowedRoles={[roles.admin]} />}>
                 <Route

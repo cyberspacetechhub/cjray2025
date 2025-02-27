@@ -12,56 +12,73 @@ import useAuth from "../../hooks/useAuth";
 //import SignIn from './SignIn';
 
 const SignUp = ({ open, dispatch }) => {
-  const post = usePost();
+  const post = usePost(); 
   const navigate = useNavigate();
-  const url = `${baseURL}sms/otp`;
+  const url = `${baseURL}customer`;
   const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
-  const { setVerifyOTP, setCode,  setUserData } =
-    useAuth();
+  const [error, setError] = useState(false)
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const {
-    register,
+  const { 
+    register, 
     handleSubmit,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const handleVerification = async (data) => {
+  const createAccount = async (data) => {
     setIsLoading(true);
-    setError("")
-    try {
-      const verificationData = { phone: data.phone, email:data.email };
-      const response = await post(url, verificationData, "");
-
-      setUserData(data)
-      setCode(response.data?.response);
-      
-      dispatch({ type: "register" });
-      dispatch({type:"verify"});
-
-
-    } catch (error) {
-      if (error.status === 409) {
-        setError("Phone Number or Email already exist")
+    const formData = new FormData();
+    for (const key in data) {
+      if (data[key]) {
+        formData.append(key, data[key]);
       }
-      else if (error.status === 400) {
-        setError(error.response?.data?.message);
-      } else if (error.status === 500) {
-        setError(" Error Sending OTP");
-      }
-    } finally {
-      
-    setIsLoading(false);
     }
-
+  
+    try {
+      const response = await post(url, formData);
+      // console.log(response.data.email);
+  
+      if (response.resullt && response.result.email) {
+        localStorage.setItem("pendingVerificationEmail", response.result.email);
+      } else {
+        console.error("Email is missing in response data:", response.result);
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setError(true);
+      console.log(err);
+    }
   };
+  
+  const { mutate } = useMutation(createAccount, {
+    onSuccess: (data) => {
+      setIsLoading(false);
+      reset();
+      toast.success("Account created successfully. Please verify your email.");
+
+      setTimeout(() => {
+        dispatch({ type: "register" });
+        navigate("/verify_email");
+      }, 3000)
+    },
+    onError: (error) => {
+      setIsLoading(false);
+      toast.error(error.message);
+    },
+  });
+
+  const handleCreateAccount = (data) => {
+   mutate(data);
+  }
+
+  const [showPassword, setShowPassword] = useState(false);
+    // const [error, setError] = useState("");
+  
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
   return (
     <Modal
       open={open}
@@ -110,7 +127,7 @@ const SignUp = ({ open, dispatch }) => {
                 <div className="text-red-500 text-sm">{error}</div>
               )}
               <form
-                onSubmit={handleSubmit(handleVerification)}
+                onSubmit={handleSubmit(handleCreateAccount)}
                 method="post"
                 // encType=''
               >

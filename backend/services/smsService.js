@@ -6,14 +6,14 @@ const sendOTP = async (data) => {
     const user = await User.findOne({
       $or: [{ phone:data.phone }, { email:data.email }],
     }).exec();
-    if (user) return { error: "Phone Number or Email already exist" };
+    // if (user) return { error: "Phone Number or Email already exist" };
     const unformated = data.phone.slice(1);
     const formated = `234${unformated}`;
     var payload = {
       to: formated,
-      from: "N-Alert",
+      from: "RGMB",
       message_type: "NUMERIC",
-      channel: "dnd",
+      channel: "generic",
       api_key: process.env.TERMII_API_KEY,
       pin_length: 4,
       pin_placeholder: "< 1234 >",
@@ -40,9 +40,9 @@ const sendCode = async (data) => {
     const formated = `234${unformated}`;
     var payload = {
       to: formated,
-      from: "N-Alert",
+      from: "RGMB",
       message_type: "NUMERIC",
-      channel: "dnd",
+      channel: "generic",
       api_key: process.env.TERMII_API_KEY,
       pin_length: 4,
       pin_placeholder: "< 1234 >",

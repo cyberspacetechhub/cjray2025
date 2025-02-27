@@ -47,6 +47,7 @@ app.use('/api/admin', require('./routes/admin'))
 app.use('/api/cart', require('./routes/cart'))
 app.use('/api/order', require('./routes/order'))
 app.use('/api/sms', require('./routes/sms'))
+app.use('/api/customer', require('./routes/customer'))
 app.use(verifyJWT);
 
 

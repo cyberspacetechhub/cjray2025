@@ -1,4 +1,4 @@
-const Customer = require('../model/Customer');
+const Customer = require('../models/Customer');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 

@@ -41,6 +41,13 @@ const UserSchema = new Schema({
   },
   refreshToken: {
     type: String,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+  refreshToken: {
+    type: String,
   }
 },{timestamps: true, ...options});
 

@@ -40,6 +40,8 @@ const Header = () => {
   };
 
   const isSmallScreen = window.innerWidth <= 1024;
+
+  console.log(auth)
   return (
     <div className="">
       <div className="bg-blue-500 dark:bg-gray-500 text-white py-2">
@@ -106,9 +108,9 @@ const Header = () => {
                   }
                 </button>
                 {
-                  auth.user || auth.company ? (
-                    <button onClick={() => navigate( auth.roles === 'Company' ? '/company': auth.user.type === 'Cordinator' ? '/cordinator' : '/')} className=" text-start  w-40  p-1">
-                      <span className=" text-white hover:text-blue-400">Dashboard</span>
+                  auth.user ? (
+                    <button onClick={() => navigate( auth.user.roles === 'Customer' ? '/dashboard' : '')} className=" text-start  w-40  p-1">
+                      <span className=" text-gray-700 dark:text-gray-300 font-semibold hover:text-blue-400">Dashboard</span>
                       
                     </button>
                   ) : (
