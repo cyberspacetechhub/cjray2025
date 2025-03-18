@@ -45,7 +45,7 @@ const Cart = () => {
                 if (cart.length === 0) {
                   toast.error("Cart is empty");
                 } else {
-                  toast.error("Please login as a customer to proceed");
+                  navigate('/auth/signin')
                 }
               } else {
                 navigate("/checkout");

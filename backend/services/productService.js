@@ -134,6 +134,25 @@ const uploadCoverImage = async (file, id) => {
     });
   };
   
+  const getProductByCategory = async (data) => {
+    let page = parseInt(data.page) || 1;
+    let limit = parseInt(data.limit) || 6;
+    let category = data.category || "Smart Homes & Automation";
+    let skip = (page - 1) * limit;
+    try {
+      const products = await Product.find({
+        category: category,
+        status: "Available",
+      })
+        .skip(skip)
+        .limit(limit)
+        .exec();
+      const totalCount = await Product.countDocuments();
+      return { products, page, totalPage: Math.ceil(totalCount / limit) };
+    } catch (e) {
+      return { error: e.message };
+    }
+  };
   
 module.exports = {
     getAllProducts,
@@ -142,5 +161,6 @@ module.exports = {
     updateProduct,
     getProduct,
     deleteProduct,
-    uploadCoverImage
+    uploadCoverImage,
+    getProductByCategory
 }

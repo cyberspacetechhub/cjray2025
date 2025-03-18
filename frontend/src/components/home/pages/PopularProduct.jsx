@@ -16,8 +16,10 @@ const PopularProduct = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const categories = ["Smart Homes & Automation", "Gadgets & Electronics"];
+  const categoryParam = categories.map(encodeURIComponent).join(",");
   const getproducts = async () => {
-    const result = await fetch(url, auth.accessToken);
+    const result = await fetch(`${url}/category?category=${categoryParam}`, auth.accessToken);
     return result.data;
   };
 

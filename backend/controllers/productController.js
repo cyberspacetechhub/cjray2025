@@ -5,7 +5,8 @@ const {
     updateProduct,
     getProduct,
     deleteProduct,
-    uploadCoverImage
+    uploadCoverImage,
+    getProductByCategory
 } = require('../services/productService');
 
 const handleGetAllProducts = async (req, res) => {
@@ -78,6 +79,20 @@ const handleUploadCoverImage = async (req, res) => {
       return res.status(500).json({ error: error });
     }
   };
+
+  const handleGetProductByCategory = async (req, res) => {
+    const data = {
+      page: req.query.page,
+      limit: req.query.limit,
+      category: req.query.category,
+    };
+  
+    const products = await getProductByCategory(data);
+    if (!products)
+      return res.status(404).json({ message: "Products not found" });
+    return res.status(200).json(products);
+  };
+
 module.exports = {
     handleGetAllProducts,
     handleGetRecentProducts,
@@ -85,5 +100,6 @@ module.exports = {
     handleUpdateProduct,
     handleGetProduct,
     handleDeleteProduct,
-    handleUploadCoverImage
+    handleUploadCoverImage,
+    handleGetProductByCategory
 }

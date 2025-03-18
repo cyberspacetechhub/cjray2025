@@ -24,7 +24,7 @@ const VerifyPage = () => {
                 if (response.ok) {
                     setMessage("Email verified successfully! Redirecting to login...");
                     setTimeout(() => {
-                        navigate("/");
+                        navigate("/auth/signin");
                       }, 3000);
                 } else {
                     setMessage(data.message || "Verification failed.");

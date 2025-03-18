@@ -8,6 +8,7 @@ import { useQuery } from 'react-query';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 const SmartLocks = () => {
   const {auth} = useAuth();
   const fetch = useFetch();
@@ -15,13 +16,14 @@ const SmartLocks = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const category = encodeURIComponent("Smart Homes & Automation");
   const getproducts = async () => {
-    const result = await fetch(url, auth.accessToken);
+    const result = await fetch(`${url}/category?category=${category}`, auth.accessToken);
     return result.data;
   };
 
   const { data, isError, isLoading, isSuccess } = useQuery(
-    ["products"],
+    ["products", category],
     getproducts,
     { keepPreviousData: true, 
         staleTime: 10000,
@@ -30,10 +32,6 @@ const SmartLocks = () => {
 
   console.log(data)
   const products = data?.products || [];
-
-// Filter products where category is "Smart Lock"
-const smartLockProducts = products.filter(product => product.category === "Smart Homes & Automation");
-console.log(smartLockProducts)
   const scrollContainerRef = useRef(null);
 
   const scrollLeft = () => {
@@ -64,7 +62,7 @@ console.log(smartLockProducts)
         <div 
           ref={scrollContainerRef}
           className="mt-5 md:grid md:grid-cols-6 gap-4 overflow-x-auto flex md:">
-          {smartLockProducts.map((product, index) => (
+          {data?.products.map((product, index) => (
             <div
               key={index}
               className="rounded-lg shadow-md hover:shadow-xl transition duration-200 p-2 bg-gray-200 dark:bg-gray-600 w-60 flex-shrink-0 md:w-auto"
@@ -112,7 +110,7 @@ console.log(smartLockProducts)
         <h2 className='font-semibold text-gray-700 dark:text-gray-300 text-lg md:text-2xl py-4 uppercase'>Smart Locks & Automation🔒🤖</h2>
         <div className=' pb-5'>
           <div className='mt-5 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-          {smartLockProducts.map((product, index) => (
+          {data?.products.map((product, index) => (
             <div
               key={index}
               className="rounded-lg shadow-md hover:shadow-xl transition duration-200 p-2 bg-gray-200 dark:bg-gray-600"

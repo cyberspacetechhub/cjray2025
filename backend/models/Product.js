@@ -44,8 +44,8 @@ const ProductSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['Pending', 'Available', 'Sold', 'Rented', 'Leased'],
-    default: 'Pending'
+    enum: ['Pending', 'Available', 'Sold Out',],
+    default: 'Available'
   },
   isTrending:{
     type: Boolean,
