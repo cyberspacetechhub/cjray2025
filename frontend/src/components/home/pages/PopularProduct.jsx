@@ -17,19 +17,25 @@ const PopularProduct = () => {
   const navigate = useNavigate();
 
   const categories = ["Smart Homes & Automation", "Gadgets & Electronics"];
-  const categoryParam = categories.map(encodeURIComponent).join(",");
-  const getproducts = async () => {
-    const result = await fetch(`${url}/category?category=${categoryParam}`, auth.accessToken);
-    return result.data;
-  };
+const categoryParam = categories
+  .map(cat => `category=${encodeURIComponent(cat)}`)
+  .join("&"); // ✅ Use & to separate multiple category values
 
-  const { data, isError, isLoading, isSuccess } = useQuery(
-    ["products"],
-    getproducts,
-    { keepPreviousData: true, 
-        staleTime: 10000,
-        refetchOnMount:"always" }
-  );
+const getproducts = async () => {
+  const result = await fetch(`${url}/category?${categoryParam}`, auth.accessToken);
+  return result.data;
+};
+
+const { data, isError, isLoading, isSuccess } = useQuery(
+  ["products", categories], // ✅ Include categories in query key for cache updates
+  getproducts,
+  { 
+    keepPreviousData: true, 
+    staleTime: 10000,
+    refetchOnMount: "always" 
+  }
+);
+
 
   console.log(data)
   const products = data?.products || [];

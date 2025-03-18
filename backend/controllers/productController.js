@@ -81,17 +81,29 @@ const handleUploadCoverImage = async (req, res) => {
   };
 
   const handleGetProductByCategory = async (req, res) => {
-    const data = {
-      page: req.query.page,
-      limit: req.query.limit,
-      category: req.query.category,
-    };
-  
-    const products = await getProductByCategory(data);
-    if (!products)
-      return res.status(404).json({ message: "Products not found" });
-    return res.status(200).json(products);
-  };
+    try {
+        const data = {
+            page: req.query.page,
+            limit: req.query.limit,
+            category: Array.isArray(req.query.category) 
+                ? req.query.category 
+                : req.query.category 
+                    ? [req.query.category] 
+                    : [], // Ensure category is an array
+        };
+
+        const products = await getProductByCategory(data);
+
+        if (!products.products.length) {
+            return res.status(404).json({ message: "No products found for the selected category." });
+        }
+
+        return res.status(200).json(products);
+    } catch (error) {
+        return res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
+
 
 module.exports = {
     handleGetAllProducts,
